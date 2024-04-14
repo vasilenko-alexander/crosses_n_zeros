@@ -2,15 +2,12 @@ use std::{fmt::Display, io, str::FromStr};
 
 fn main() {
     println!("Hello, Players! Welcome to Cross and Zeros!");
-    let mut user_choice = String::new();
+
     'game_loop: loop {
         show_main_menu();
 
-        user_choice.clear();
-        // If we cannot read from the console, we crash
-        io::stdin()
-            .read_line(&mut user_choice)
-            .expect("Could not read user action!");
+        let user_choice =
+            read_user_action_choice().expect("Could not read player's choice. Shutting down...");
 
         match user_choice.parse::<MainMenuActions>() {
             Ok(action) => match action {
@@ -29,6 +26,14 @@ fn show_main_menu() {
     println!("1. Start new game");
     println!("2. Quit");
     println!("Please select an action by its code: ");
+}
+
+fn read_user_action_choice() -> Result<String, io::Error> {
+    let mut user_choice = String::new();
+
+    io::stdin().read_line(&mut user_choice)?;
+
+    Ok(user_choice)
 }
 
 enum MainMenuActions {
