@@ -5,5 +5,6 @@ mod screens;
 use game::Game;
 
 fn main() {
-    Game::new().run();
+    let mut game = Game::new();
+    game.run();
 }

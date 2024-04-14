@@ -1,8 +1,8 @@
-use std::io;
+use std::{borrow::Borrow, io};
 
 use crate::{
     actions::GameStateAction,
-    screens::{GameSessionScreen, MainScreen, Screen},
+    screens::{MainScreen, Screen},
 };
 
 pub struct Game {
@@ -18,7 +18,7 @@ impl Game {
         }
     }
 
-    pub fn run(&self) {
+    pub fn run(&mut self) {
         self.show_welcome_banner();
 
         loop {
@@ -30,9 +30,14 @@ impl Game {
                 Ok(action) => action,
                 Err(err) => {
                     println!("{err} Please try again...");
-                    GameStateAction::ChangeScreen()
+                    continue;
                 }
             };
+
+            match game_action {
+                GameStateAction::ChangeScreen(screen) => self.current_screen = screen,
+                GameStateAction::Quit => break,
+            }
         }
     }
 

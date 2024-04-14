@@ -2,7 +2,10 @@ use crate::actions::{errors::ActionParseError, GameSessionAction, GameStateActio
 
 use super::{MainScreen, Screen};
 
-pub struct GameSessionScreen {}
+#[derive(Copy, Clone)]
+pub struct GameSessionScreen {
+    
+}
 
 impl Screen for GameSessionScreen {
     fn show_display(&self) {
@@ -14,8 +17,9 @@ impl Screen for GameSessionScreen {
     }
 
     fn show_actions(&self) {
-        println!("1. Mark board field in format(code x,y)");
+        println!("1. Occupy board field");
         println!("2. Admit Defeat");
+        println!("3. Quit");
     }
 
     fn handle_action(&self, action: String) -> Result<GameStateAction, ActionParseError> {
