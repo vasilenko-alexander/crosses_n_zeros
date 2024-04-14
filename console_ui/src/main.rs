@@ -1,7 +1,7 @@
 use std::{fmt::Display, io, str::FromStr};
 
 fn main() {
-    println!("Hello, Players! Welcome to Cross and Zeros!");
+    show_welcome_banner();
 
     'game_loop: loop {
         show_main_menu();
@@ -19,6 +19,10 @@ fn main() {
             }
         }
     }
+}
+
+fn show_welcome_banner() {
+    println!("Hello, Players! Welcome to Cross and Zeros!");
 }
 
 fn show_main_menu() {
