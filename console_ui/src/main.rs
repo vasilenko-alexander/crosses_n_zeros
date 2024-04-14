@@ -6,8 +6,10 @@ fn main() {
     'game_loop: loop {
         show_main_menu();
 
-        let user_choice =
-            read_user_action_choice().expect("Could not read player's choice. Shutting down...");
+        // If we cannot read user input from console we would not be able to proceed.
+        // So we crash and will log such things in future
+        let user_choice = read_user_action_choice()
+            .expect("Failed to read player's choice from console. Shutting down...");
 
         match user_choice.parse::<MainMenuActions>() {
             Ok(action) => match action {
