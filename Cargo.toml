@@ -1,2 +1,10 @@
 [workspace]
 members = ["console_ui", "game_logic"]
+
+[workspace.package]
+name = "cross_n_zeros"
+version = "0.1.0"
+authors = ["Asvas (Aliaksandr Vasilenka)"]
+license = "MIT"
+license-file = "LICENSE"
+edition = "2021"
