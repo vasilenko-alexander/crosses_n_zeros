@@ -1,2 +1,2 @@
 # crosses_n_zeros
-simple game on rust
+simple console game written in rust
