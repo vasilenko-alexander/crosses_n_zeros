@@ -3,7 +3,7 @@ use std::{fmt::Display, io, str::FromStr};
 fn main() {
     show_welcome_banner();
 
-    'game_loop: loop {
+    loop {
         show_main_menu();
 
         // If we cannot read user input from console we would not be able to proceed.
@@ -13,8 +13,8 @@ fn main() {
 
         match user_choice.parse::<MainMenuActions>() {
             Ok(action) => match action {
-                MainMenuActions::Start => println!("Starting the game..."),
-                MainMenuActions::Quit => break 'game_loop,
+                MainMenuActions::Start => show_game_board(),
+                MainMenuActions::Quit => break,
             },
             Err(err) => {
                 println!("{err}Please try again...");
@@ -40,6 +40,20 @@ fn read_user_action_choice() -> Result<String, io::Error> {
     io::stdin().read_line(&mut user_choice)?;
 
     Ok(user_choice)
+}
+
+fn show_game_board() {
+    let underscore = '\u{ff3f}';
+    let first_player = 'X';
+    let second_player = 'O';
+    println!("{first_player}|{first_player}|{second_player}");
+    println!("{second_player}|{second_player}|{first_player}");
+    println!("{first_player}|{second_player}|{first_player}");
+}
+
+enum GameActions {
+    MarkBoardField(i32, i32),
+    AdmitDefeat,
 }
 
 enum MainMenuActions {
