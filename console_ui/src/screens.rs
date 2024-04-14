@@ -12,5 +12,5 @@ pub trait Screen {
     }
     fn show_display(&self);
     fn show_actions(&self);
-    fn handle_action(&self, action: String) -> Result<GameStateAction, ActionParseError>;
+    fn handle_action(&mut self, action: String) -> Result<GameStateAction, ActionParseError>;
 }

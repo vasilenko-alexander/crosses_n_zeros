@@ -5,3 +5,6 @@ authors.workspace = true
 license.workspace = true
 license-file.workspace = true
 edition.workspace = true
+
+[dependencies]
+game_logic = { path = "../game_logic" }

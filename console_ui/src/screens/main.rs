@@ -1,3 +1,5 @@
+use game_logic::{GameBoard, Player};
+
 use super::{GameSessionScreen, Screen};
 use crate::actions::{errors::ActionParseError, GameStateAction, MainAction};
 
@@ -14,11 +16,11 @@ impl Screen for MainScreen {
         println!("Please select an action by its code: ");
     }
 
-    fn handle_action(&self, action: String) -> Result<GameStateAction, ActionParseError> {
+    fn handle_action(&mut self, action: String) -> Result<GameStateAction, ActionParseError> {
         let action = action.parse::<MainAction>()?;
         match action {
             MainAction::Start => Ok(GameStateAction::ChangeScreen(Box::new(
-                GameSessionScreen {},
+                GameSessionScreen::new(GameBoard::new(3), Player::create_player_x()),
             ))),
             MainAction::Quit => Ok(GameStateAction::Quit),
         }
