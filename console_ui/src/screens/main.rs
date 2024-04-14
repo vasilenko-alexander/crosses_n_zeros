@@ -5,7 +5,7 @@ pub struct MainScreen {}
 
 impl Screen for MainScreen {
     fn show_display(&self) {
-        println!("Hello, Players! Welcome to Cross and Zeros!");
+        println!("Welcome to 'Cross vs Zero'!");
     }
 
     fn show_actions(&self) {

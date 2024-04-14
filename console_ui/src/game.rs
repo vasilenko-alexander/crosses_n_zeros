@@ -6,21 +6,17 @@ use crate::{
 };
 
 pub struct Game {
-    welcome_banner: String,
     current_screen: Box<dyn Screen>,
 }
 
 impl Game {
     pub fn new() -> Self {
         Self {
-            welcome_banner: "Welcome to Cross and Zeros!".to_owned(),
             current_screen: Box::new(MainScreen {}),
         }
     }
 
     pub fn run(&mut self) {
-        self.show_welcome_banner();
-
         loop {
             self.current_screen.show();
 
@@ -39,10 +35,6 @@ impl Game {
                 GameStateAction::Quit => break,
             }
         }
-    }
-
-    fn show_welcome_banner(&self) {
-        println!("{}", self.welcome_banner)
     }
 
     fn read_player_action(&self) -> String {
