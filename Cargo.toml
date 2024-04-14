@@ -1,0 +1,2 @@
+[workspace]
+members = ["console_ui", "game_logic"]
