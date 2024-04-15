@@ -63,11 +63,23 @@ impl GameBoard {
     }
 
     pub fn check_for_result(&self, player: Player) -> Option<GameResult> {
-        self.check_rows(player)?;
+        let mut result = self.check_rows(player);
 
-        self.check_columns(player)?;
+        if result.is_some() {
+            return result;
+        }
 
-        self.check_diagonals(player)?;
+        result = self.check_columns(player);
+
+        if result.is_some() {
+            return result;
+        }
+
+        result = self.check_diagonals(player);
+
+        if result.is_some() {
+            return result;
+        }
 
         self.check_for_draw()
     }
@@ -121,7 +133,9 @@ impl GameBoard {
             .iter()
             .all(|r| {
                 let check_result = r.get(cell_in_diag_indx).is_some_and(cell_checker);
-                cell_in_diag_indx -= 1;
+                if cell_in_diag_indx > 0 {
+                    cell_in_diag_indx -= 1;
+                }
                 check_result
             })
             .then_some(GameResult::Win(player))
@@ -132,5 +146,29 @@ impl GameBoard {
             .iter()
             .all(|r| r.iter().all(|c| *c != Cell::Empty))
             .then_some(GameResult::Draw)
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    // TODO: Add tests for game logic
+    #[test]
+    fn create_board() {
+        let board = GameBoard::new();
+        assert_eq!(board.size(), 3);
+    }
+
+    #[test]
+    fn print_board() {
+        let board = GameBoard::new();
+        println!("{board}");
+    }
+
+    #[test]
+    fn check_draw() {
+        let board = GameBoard::new();
+        let playerX = Player::create_player_x();
+        let playerO = Player::create_player_o();
     }
 }

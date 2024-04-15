@@ -33,6 +33,7 @@ impl Screen for GameSessionScreen {
     fn handle_action(&mut self, action: String) -> Result<GameStateAction, ActionParseError> {
         let action = action.parse::<GameSessionAction>()?;
 
+        // TODO: Change action mapping to use register of actions for a screen with Fn objects
         match action {
             GameSessionAction::MarkBoardField => {
                 println!(
@@ -40,6 +41,7 @@ impl Screen for GameSessionScreen {
                     self.current_player
                 );
 
+                // TODO: Properly handle user input for cell position
                 let mut input = String::new();
                 io::stdin()
                     .read_line(&mut input)
@@ -52,11 +54,13 @@ impl Screen for GameSessionScreen {
                     .expect("failed to occupy");
 
                 if let Some(result) = self.board.check_for_result(self.current_player) {
+                    self.show_display();
                     match result {
-                        GameResult::Win(winner) => println!("Player{} is a winner", winner),
+                        GameResult::Win(winner) => println!("{} is a winner", winner),
                         GameResult::Draw => println!("It's a draw"),
                     }
 
+                    // TODO: Add Win screen with ability to restart
                     return Ok(GameStateAction::ChangeScreen(Box::new(MainScreen {})));
                 }
 

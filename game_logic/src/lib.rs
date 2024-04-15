@@ -33,20 +33,3 @@ impl Display for Player {
         write!(f, "{}", player_mark)
     }
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-    // TODO: Add tests for game logic
-    #[test]
-    fn create_board() {
-        let board = GameBoard::new();
-        assert_eq!(board.size(), 3);
-    }
-
-    #[test]
-    fn print_board() {
-        let board = GameBoard::new();
-        println!("{board}");
-    }
-}
