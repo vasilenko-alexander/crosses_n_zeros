@@ -1,8 +1,11 @@
 mod board_cell;
+mod errors;
 
 use crate::{GameResult, Player};
-pub use board_cell::{BoardCellPosition, Cell};
 use std::fmt::Display;
+
+pub use board_cell::{BoardCellPosition, Cell};
+pub use errors::FieldOccupiedError;
 
 const BOARD_SIZE: usize = 3;
 
@@ -39,6 +42,7 @@ impl GameBoard {
         position: BoardCellPosition,
         player: Player,
     ) -> Result<(), FieldOccupiedError> {
+        // TODO add proper error handling here for out of range errors
         let cell = self
             .cells
             .get_mut(position.row)
@@ -81,27 +85,5 @@ impl GameBoard {
             .iter()
             .any(|r| r.iter().all(row_check))
             .then_some(GameResult::Win(player))
-    }
-}
-
-#[derive(Debug)]
-pub struct FieldOccupiedError {
-    position: BoardCellPosition,
-    player: Player,
-}
-
-impl Display for FieldOccupiedError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(
-            f,
-            "{} already occupied by player{}",
-            self.position, self.player
-        )
-    }
-}
-
-impl FieldOccupiedError {
-    pub fn new(position: BoardCellPosition, player: Player) -> Self {
-        Self { position, player }
     }
 }

@@ -37,7 +37,7 @@ impl Display for Player {
 #[cfg(test)]
 mod tests {
     use super::*;
-
+    // TODO: Add tests for game logic
     #[test]
     fn create_board() {
         let board = GameBoard::new();
