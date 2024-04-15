@@ -1,2 +1,2 @@
-# crosses_n_zeros
+# Cross vs Zero
 simple console game written in rust
