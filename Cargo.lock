@@ -3,7 +3,7 @@
 version = 3
 
 [[package]]
-name = "console_ui"
+name = "cross_vs_zero"
 version = "0.1.0"
 dependencies = [
  "game_logic",

@@ -1,10 +1,9 @@
 [workspace]
-members = ["console_ui", "game_logic"]
+members = ["cross_vs_zero", "game_logic"]
+resolver = "2"
 
 [workspace.package]
-name = "cross_n_zeros"
 version = "0.1.0"
 authors = ["Asvas (Aliaksandr Vasilenka)"]
 license = "MIT"
-license-file = "LICENSE"
 edition = "2021"
