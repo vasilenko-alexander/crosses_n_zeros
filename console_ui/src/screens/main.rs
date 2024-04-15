@@ -20,7 +20,7 @@ impl Screen for MainScreen {
         let action = action.parse::<MainAction>()?;
         match action {
             MainAction::Start => Ok(GameStateAction::ChangeScreen(Box::new(
-                GameSessionScreen::new(GameBoard::new(3), Player::create_player_x()),
+                GameSessionScreen::new(GameBoard::new(), Player::create_player_x()),
             ))),
             MainAction::Quit => Ok(GameStateAction::Quit),
         }
